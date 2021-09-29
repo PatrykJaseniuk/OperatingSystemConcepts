@@ -12,18 +12,22 @@
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
+#include <asm/param.h>
+#include <linux/jiffies.h>
 
 /* This function is called when the module is loaded. */
 static int simple_init(void)
 {
-       printk(KERN_INFO "Loading Module\n");
+       
+       
+       printk(KERN_INFO "Loading module,timer interupt frequency= %i\nquantity of interupts = %i \n", HZ, jiffies);
 
        return 0;
 }
 
 /* This function is called when the module is removed. */
 static void simple_exit(void) {
-	printk(KERN_INFO "Removing Module\n");
+	printk(KERN_INFO "Removing Module, quantity if interupts = %i\n", jiffies);
 }
 
 /* Macros for registering module entry and exit points. */

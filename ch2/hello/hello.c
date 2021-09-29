@@ -15,6 +15,7 @@
 #include <linux/kernel.h>
 #include <linux/proc_fs.h>
 #include <asm/uaccess.h>
+#include <linux/jiffies.h>
 
 #define BUFFER_SIZE 128
 
@@ -83,10 +84,10 @@ static ssize_t proc_read(struct file *file, char __user *usr_buf, size_t count, 
 
         completed = 1;
 
-        rv = sprintf(buffer, "Hello World\n");
+        rv = sprintf(buffer, "interupt quantity= %i\n", jiffies);
 
         // copies the contents of buffer to userspace usr_buf
-        copy_to_user(usr_buf, buffer, rv);
+        raw_copy_to_user(usr_buf, buffer, rv);
 
         return rv;
 }
